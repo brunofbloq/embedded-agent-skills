@@ -6,6 +6,18 @@
 [![Upstream](https://img.shields.io/badge/upstream-16%20sources%20monitored-216E39)](maintenance/sources.json)
 [![LLM](https://img.shields.io/badge/upstream%20PRs-no%20LLM-216E39)](.github/workflows/upstream-review.yml)
 
+
+
+<p align="center">
+  <img
+    src="assets/logo-embedded-skills.gif"
+    alt="Embedded Agent Skills — MCU and circuit animation"
+    width="800"
+  />
+</p>
+  
+
+
 **Portable, lean, engineering-focused agent skills for embedded development.** Architecture decision-making, implementation and independent verification are separate capabilities. Supports bare-metal MCU, RTOS, embedded Linux and heterogeneous systems, with on-demand references rather than unnecessary baseline prompt tokens.
 
 

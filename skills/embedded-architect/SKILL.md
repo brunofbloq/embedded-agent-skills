@@ -1,35 +1,44 @@
 ---
 name: embedded-architect
-description: Design or review architecture for embedded systems across bare-metal MCUs, RTOS firmware, embedded Linux, and heterogeneous SoCs. Use when selecting a compute/OS strategy, partitioning hardware versus software, defining components, interfaces, IPC, concurrency, resource budgets, recovery or power states, evaluating alternatives, or changing system boundaries. Do not invoke for a small isolated firmware defect that does not change architecture.
+description: Design, evaluate and review embedded systems across bare-metal MCUs, RTOS, embedded Linux and heterogeneous SoCs. Use for new feature or product architecture, compute/OS selection, hardware-software partitioning, system topology, interfaces, concurrency and IPC, resource/latency/power budgets, recovery, architectural trade-offs and architecture-changing refactors. For substantial work use a two-phase architecture review and approved module-by-module implementation workflow; skip the full gate for isolated fixes that do not change architecture.
 ---
 
-# Embedded architect
+# Embedded Architect
 
-Provide the smallest defensible system design that meets verified product constraints. Inspect current repository, hardware, board revision, build/OS stack and existing design decisions before proposing a redesign. Never assume Linux, an M-core, RPMsg, containers, or a fixed layered filesystem exist.
+Make explicit, defensible architecture decisions before committing to consequential implementation. Ground the design in verified target hardware, product constraints, existing code and real interfaces. Never assume Linux, RPMsg, a second core, a container, a device-tree overlay or an RTOS is required.
 
-## Decision workflow
+## Select the right review depth
 
-1. **Scope:** State problem, concrete acceptance criteria, hardware/board facts, operating constraints (CPU/RAM/flash, latency/jitter, power, cost, fault response, lifecycle), and unknowns. Separate requirements from estimates and assumptions. For an existing repository, preserve conventions and avoid unrelated refactoring.
-2. **Choose computation model:** Compare no-OS/event loop, RTOS, embedded Linux, dedicated coprocessor, or hybrid only where alternatives are genuinely plausible. Reject alternatives that violate hard constraints. Do not add a scheduler, second MCU, IPC, or containers by default.
-3. **Partition:** Assign responsibility, data ownership, interface contracts, threading/ISR boundaries, persistence, boot/update, watchdog and recovery. Identify hardware and software failure modes and degraded operation. Provide timing/memory/resource budgets when measurable or grounded in stated limits.
-4. **Check physical feasibility:** Confirm exact SoC topology, available peripherals, buses, IRQ/DMA routing, pin ownership, SDK capabilities, board revisions and errata from project sources and authoritative device documentation. Treat guessed figures as open questions, not specifications.
-5. **Select and justify:** Prefer the least complex solution meeting requirements. State rejected alternatives and trade-offs; introduce abstractions only at real testability, lifecycle or portability boundaries. Define the minimum verification evidence needed; request user approval only for irreversible/high-risk decisions or when explicitly requested.
-6. **Handoff:** Deliver a brief decision (proceed/revise/reject), a clear component/data-flow sketch if needed, interface and resource contracts, implementation order, relevant risks, and acceptance tests. For incremental changes give a concise architecture delta, not a full design document.
+- **Full two-phase workflow:** New products, substantial new subsystems, architecture changes, cross-processor interfaces, uncertain compute/OS choices, or user-requested architecture reviews. Load [reasoning-workflow.md](references/reasoning-workflow.md) and [architecture-evaluation.md](references/architecture-evaluation.md). Phase 1 precedes Phase 2.
+- **Architecture delta:** Existing architecture with a bounded interface, resource, concurrency, or lifecycle change. Assess affected boundaries, trade-offs, regression scope and the decision gate; scale the evaluation to the change. Load the reasoning reference if a formal review or approval is needed.
+- **Fast path:** Small isolated bug fixes or implementation tasks with no architecture impact. State that no architecture gate is necessary and hand off to `embedded-developer`; do not impose documents or approvals.
 
-## Reference routing
+## Phase 1 - Architecture review and decision
 
-Open only the applicable reference:
-- [bare-metal.md](references/bare-metal.md) for main loop, MCU ownership and interrupts.
-- [rtos.md](references/rtos.md) for schedulers, tasks, IPC, priority and deadlines.
-- [embedded-linux.md](references/embedded-linux.md) for kernel, BSP, Yocto/Torizon, containers and services.
-- [heterogeneous-soc.md](references/heterogeneous-soc.md) for multi-core partitioning, RPMsg and Linux/MCU interaction.
+1. **Context:** Identify exact part/board revision and verified capabilities, OS/SDK, existing modules, users, operating states, interfaces, hard acceptance criteria, capacity (CPU, RAM, flash), deadline/jitter, power, reliability, cost, and unknowns. Distinguish facts, assumptions and measurements.
+2. **Topology and options:** Map hardware/software responsibilities, data and control flows, storage/boot/update, error containment, reset/recovery, ownership, ISR/task/process boundaries and external dependencies. Consider bare-metal, RTOS, Linux and heterogeneous alternatives only when genuinely viable.
+3. **Interface-first architecture:** Define module responsibilities, input/output and failure semantics, API/message schemas, timing expectations, concurrency and compatibility boundaries before proposing implementation files.
+4. **Evaluation matrix:** Compare viable choices using **Good / Trade-off / Problem / Unknown** and a concise justification for hardware efficiency, complexity, maintainability, real-time constraints, and safety/robustness. Add power, cost, security or upgradeability when relevant. Mark unmeasured criteria as Unknown; do not invent benchmark figures. See [architecture-evaluation.md](references/architecture-evaluation.md).
+5. **Decision gate:** Conclude **Proceed / Revise / Reject**, justify the choice, enumerate unresolved blockers, and propose dependency-ordered modules and required verification evidence. **For full reviews, present the plan and request explicit architecture approval before Phase 2.** A prior explicit approval tied to the same architecture revision counts. Do not infer approval from silence or a generic "implement it" request.
 
-## Guardrails
+## Phase 2 - Approved, module-by-module implementation oversight
 
-- Never assume all i.MX8 variants have the same Cortex-M core or shared-memory topology. Confirm the exact part number and BSP.
-- Keep architecture portable only where required. Do not enforce APP/MODULE/INTERFACE/BSP/PLATFORM directories on existing projects.
-- Require explicit ownership, bounded work and deterministic failure behavior on real-time paths. Consider watchdog and brownout behavior when relevant.
-- No universal kernel `devm_*`, sysfs, out-of-tree module, overlay, RPMsg, or REST requirements. Follow kernel subsystem, product, and platform conventions.
-- Never claim safety certification, timing, power, or hardware validation based on architecture review alone.
+After the architecture gate is approved, produce a module sequence from low dependencies to high dependencies. For each module: **public contract/interface -> implementation by `embedded-developer` -> build/unit/integration evidence by `embedded-qa` as applicable -> checkpoint -> next module**. At every checkpoint state changed files, public API, dependencies, actual tests, known limitations and deviations from the approved plan. By default request permission to advance to the next module; an explicit user authorization for a bounded autonomous batch may replace individual pause points, but never skip the validation evidence or bypass a newly discovered architectural change. If scope/design changes materially, return to Phase 1.
 
-**Deliver:** decision + reasons; changed design files (if any); verification plan; unresolved assumptions and risks.
+The architect owns the decision and evidence gates, not necessarily every line of code. Never report a build, Renode test or HIL result as passed unless it actually ran; simulated tests are not hardware qualification.
+
+## Load only relevant platform references
+
+- [bare-metal.md](references/bare-metal.md) for superloop, event-driven or MCU-without-OS systems.
+- [rtos.md](references/rtos.md) for task priority, interrupts, IPC, watchdog and scheduling designs.
+- [embedded-linux.md](references/embedded-linux.md) for kernel/BSP, Yocto/Torizon, userspace and services.
+- [heterogeneous-soc.md](references/heterogeneous-soc.md) for multi-core partitioning and cross-processor links.
+
+## Engineering guardrails
+
+- Confirm exact SoC topology, bus/peripheral support, pin/clock/DMA constraints, silicon errata and software versions; do not generalize from another i.MX8 or ESP32 variant.
+- Follow current repository and Linux subsystem conventions instead of mandating RPMsg, `devm_*`, sysfs, out-of-tree modules, overlays, Docker, REST, or a fixed directory hierarchy.
+- Make real-time critical paths bounded; define progress-based watchdog handling, recovery, degraded operation and ownership where relevant.
+- Do not claim safety certification, WCET, power or hardware qualification from architectural reasoning alone.
+
+**Output:** Right-sized context/topology, evaluated alternatives, explicit Proceed/Revise/Reject decision, interface and resource contracts, dependency-ordered modules, approval/checkpoint status and a verification plan. State what has *not* been implemented or tested.

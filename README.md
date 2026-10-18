@@ -8,7 +8,6 @@
 
 **Portable, lean, engineering-focused agent skills for embedded development.** Architecture decision-making, implementation and independent verification are separate capabilities. Supports bare-metal MCU, RTOS, embedded Linux and heterogeneous systems, with on-demand references rather than unnecessary baseline prompt tokens.
 
-> **CI badge meaning:** GitHub Actions is *configured*, not asserted to have passed on a remote GitHub repository. After publishing, optionally replace it with the live Actions status badge for your actual `OWNER/REPO` (see [Publishing](#publishing-and-live-ci-badge)).
 
 ## Skills
 
@@ -117,7 +116,9 @@ git push -u origin main
 
 **No remote repository is created by the ZIP.** Replace `OWNER` before running these commands. The bundled `dist/<name>/skill.zip` packages are individual installable skills; the top-level repository ZIP is meant to be extracted and committed, not installed as one skill.
 
-## Upstream monitoring: deterministic PRs, no LLM
+> **CI badge meaning:** GitHub Actions is *configured*, not asserted to have passed on a remote GitHub repository. After publishing, optionally replace it with the live Actions status badge for your actual `OWNER/REPO` (see [Publishing](#publishing-and-live-ci-badge)).
+
+## Upstream monitoring
 
 `.github/workflows/upstream-review.yml` runs on Mondays at 08:23 UTC and supports manual dispatch. It tracks the **16 monitored upstream sources** defined in [`maintenance/sources.json`](maintenance/sources.json), including curated public skills and official Renode, Zephyr, FreeRTOS, ESP-IDF, STM32C0 and Torizon sources. Baselines are in [`maintenance/reviewed-revisions.json`](maintenance/reviewed-revisions.json).
 

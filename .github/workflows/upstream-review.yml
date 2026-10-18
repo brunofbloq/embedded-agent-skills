@@ -1,0 +1,61 @@
+name: Check primary embedded sources
+on:
+  schedule:
+    - cron: '23 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: embedded-upstream-review
+  cancel-in-progress: false
+
+jobs:
+  detect-and-propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout default branch
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+
+      - name: Validate manifests and skills
+        run: |
+          python scripts/validate_skills.py
+          python -m unittest discover -s tests -v
+
+      - name: Detect upstream changes (no LLM)
+        id: scan
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/check_upstream.py
+
+      - name: Validate generated review
+        if: steps.scan.outputs.has_changes == 'true'
+        run: |
+          python scripts/validate_skills.py
+          python -m unittest discover -s tests -v
+
+      - name: Create/update review PR
+        if: steps.scan.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/upstream-source-review
+          base: ${{ github.event.repository.default_branch }}
+          draft: always-true
+          add-paths: |
+            maintenance/reviewed-revisions.json
+            maintenance/reviews/upstream-changes.md
+          commit-message: 'chore: record upstream source changes for manual review'
+          title: 'review: upstream embedded skills and tool releases'
+          body-path: maintenance/reviews/upstream-changes.md
+          delete-branch: true

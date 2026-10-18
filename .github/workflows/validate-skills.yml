@@ -1,0 +1,27 @@
+name: Validate embedded skills
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - name: Validate skill metadata, links, source manifests and tests
+        run: |
+          python scripts/validate_skills.py
+          python -m unittest discover -s tests -v
+          python -m unittest discover -s skills/embedded-qa/tests -v
+      - name: Syntax-check Python
+        run: |
+          python -m compileall -q scripts skills/embedded-qa/scripts

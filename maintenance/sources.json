@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "sources": [
+    {
+      "id": "jeffallan-embedded",
+      "repo": "Jeffallan/claude-skills",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "skills/embedded-systems/"
+      ],
+      "skills": [
+        "embedded-architect",
+        "embedded-developer",
+        "embedded-qa"
+      ],
+      "reason": "Base engineering workflow and conditional references"
+    },
+    {
+      "id": "rovinax-embedded",
+      "repo": "rovinax/embedded-skills",
+      "mode": "files",
+      "ref": "master",
+      "paths": [
+        "skills/embedded-architect/",
+        "skills/embedded-cstyle/",
+        "skills/embedded-driver-design/",
+        "skills/embedded-rtos-design/",
+        "skills/embedded-isr-design/",
+        "skills/embedded-documentation/",
+        "CONTEXT.md"
+      ],
+      "skills": [
+        "embedded-architect",
+        "embedded-developer"
+      ],
+      "reason": "Architecture, RTOS, driver and ISR practices"
+    },
+    {
+      "id": "esp32-agent",
+      "repo": "ezrover/ESP32-AI-Agent-Skill",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "skills/esp32/",
+        "references/platforms/",
+        "references/esp32/",
+        "references/esp32-s3/",
+        "references/esp32-c3/",
+        "scripts/validate_pinmap.py"
+      ],
+      "skills": [
+        "embedded-developer"
+      ],
+      "reason": "ESP32-specific pin and boot guardrails"
+    },
+    {
+      "id": "esp32-agent-alt",
+      "repo": "ziphercx/ESP32-Agent-Skill",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "skills/esp32/",
+        "references/platforms/",
+        "scripts/validate_pinmap.py"
+      ],
+      "skills": [
+        "embedded-developer"
+      ],
+      "reason": "Supplementary ESP32 peripheral references"
+    },
+    {
+      "id": "mcu-board-profiles",
+      "repo": "alexex1993/mcu-skills",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "skills/",
+        "scripts/"
+      ],
+      "skills": [
+        "embedded-developer",
+        "embedded-architect"
+      ],
+      "reason": "MCU and board profiles"
+    },
+    {
+      "id": "embedded-tooling",
+      "repo": "zhinkgit/embeddedskills",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "gcc/",
+        "jlink/",
+        "openocd/",
+        "probe-rs/",
+        "workflow/",
+        "serial/"
+      ],
+      "skills": [
+        "embedded-qa"
+      ],
+      "reason": "Build, flash and debugging workflow integration"
+    },
+    {
+      "id": "embedded-tool-calculators",
+      "repo": "captainluzik/oh-my-embedded",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "skills/embedded-engineer/",
+        "skills/firmware-debugger/",
+        "skills/embedded-review/",
+        "src/tools/"
+      ],
+      "skills": [
+        "embedded-architect",
+        "embedded-developer",
+        "embedded-qa"
+      ],
+      "reason": "Peripheral analysis and tooling patterns"
+    },
+    {
+      "id": "renode-tmnl-patterns",
+      "repo": "creatifcoding/gbg",
+      "mode": "files",
+      "ref": "master",
+      "paths": [
+        "packages/tmnl/.claude/skills/renode-init/",
+        "packages/tmnl/.claude/skills/renode-development/",
+        "packages/tmnl/.claude/skills/renode-for-tmnl/",
+        "packages/tmnl/embedded/renode/"
+      ],
+      "skills": [
+        "embedded-qa"
+      ],
+      "reason": "Project-specific Renode workflows: assess for generalizable changes only"
+    },
+    {
+      "id": "renode-evidence-policy",
+      "repo": "Agile-V/agile_v_skills",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "profiles/evidence-sources/renode-simulation-v1.yaml",
+        "catalog/evidence-adapters.json"
+      ],
+      "skills": [
+        "embedded-qa"
+      ],
+      "reason": "Emulated-vs-physical evidence classification"
+    },
+    {
+      "id": "stm32cube-c0",
+      "repo": "STMicroelectronics/STM32CubeC0",
+      "mode": "files",
+      "ref": "main",
+      "paths": [
+        "Drivers/STM32C0xx_HAL_Driver/",
+        "Drivers/CMSIS/Device/ST/STM32C0xx/"
+      ],
+      "skills": [
+        "embedded-developer",
+        "embedded-qa"
+      ],
+      "reason": "Selected official STM32C0 HAL and device headers"
+    },
+    {
+      "id": "renode-releases",
+      "repo": "renode/renode",
+      "mode": "release",
+      "skills": [
+        "embedded-qa"
+      ],
+      "reason": "Official Renode stable releases"
+    },
+    {
+      "id": "esp-idf-releases",
+      "repo": "espressif/esp-idf",
+      "mode": "release",
+      "skills": [
+        "embedded-developer",
+        "embedded-architect"
+      ],
+      "reason": "Official ESP-IDF stable releases"
+    },
+    {
+      "id": "freertos-kernel-releases",
+      "repo": "FreeRTOS/FreeRTOS-Kernel",
+      "mode": "release",
+      "skills": [
+        "embedded-developer",
+        "embedded-architect",
+        "embedded-qa"
+      ],
+      "reason": "Official FreeRTOS kernel stable releases"
+    },
+    {
+      "id": "zephyr-releases",
+      "repo": "zephyrproject-rtos/zephyr",
+      "mode": "release",
+      "skills": [
+        "embedded-developer",
+        "embedded-architect",
+        "embedded-qa"
+      ],
+      "reason": "Official Zephyr stable releases"
+    },
+    {
+      "id": "torizoncore-builder",
+      "repo": "torizon/torizoncore-builder",
+      "mode": "files",
+      "ref": "trixie",
+      "paths": [
+        "tcbuilder/",
+        "tests/integration/"
+      ],
+      "skills": [
+        "embedded-architect",
+        "embedded-developer"
+      ],
+      "reason": "Official TorizonCore Builder image customization and integration patterns"
+    },
+    {
+      "id": "torizon-yocto-layer",
+      "repo": "toradex/meta-toradex-torizon",
+      "mode": "files",
+      "ref": "kirkstone-6.x.y",
+      "paths": [
+        "conf/",
+        "classes/",
+        "recipes-core/"
+      ],
+      "skills": [
+        "embedded-architect",
+        "embedded-developer"
+      ],
+      "reason": "Official Torizon Yocto configuration and core integration patterns"
+    }
+  ]
+}

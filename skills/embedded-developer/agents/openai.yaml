@@ -1,0 +1,3 @@
+interface:
+  display_name: "Embedded Developer"
+  short_description: "Implement and debug MCU, RTOS and low-level embedded software"

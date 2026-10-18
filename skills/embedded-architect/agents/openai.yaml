@@ -1,0 +1,3 @@
+interface:
+  display_name: "Embedded Architect"
+  short_description: "Design bare-metal, RTOS, Linux and heterogeneous embedded systems"

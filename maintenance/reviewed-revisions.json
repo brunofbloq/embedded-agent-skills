@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "sources": {
+    "jeffallan-embedded": {
+      "commit": "36f3fe8052da7c57083783268c6ea3265d075265"
+    },
+    "rovinax-embedded": {
+      "commit": "022ce31b469b1a1d0c1261c2c8d0f3e07b2c0bbc"
+    },
+    "esp32-agent": {
+      "commit": "124d298e4ccaa737dbf6d26bbae47722e17f3097"
+    },
+    "esp32-agent-alt": {
+      "commit": "b57c80dd83c59c6a227abc74ab8f0debdcb35dba"
+    },
+    "mcu-board-profiles": {
+      "commit": "48b56f8756a21c6e566bd3edd6a1f942b4ef2738"
+    },
+    "embedded-tooling": {
+      "commit": "536c1f929e359a5c02ef8ea9f1a20691e8d764e3"
+    },
+    "embedded-tool-calculators": {
+      "commit": "57ab091cbebf655a788fba579d027b690065ab4e"
+    },
+    "renode-tmnl-patterns": {
+      "commit": "421d4561df6a0385cb087540cdf63996826c2375"
+    },
+    "renode-evidence-policy": {
+      "commit": "4bcc9172f7e00fa3f04bd249584d537a7dbe5600"
+    },
+    "stm32cube-c0": {
+      "commit": "3554bc37495805d57d2bbf4fc9c2e722a9f79114"
+    },
+    "renode-releases": {
+      "tag": "v1.17.0"
+    },
+    "esp-idf-releases": {
+      "tag": "v6.1"
+    },
+    "freertos-kernel-releases": {
+      "tag": "V11.3.2"
+    },
+    "zephyr-releases": {
+      "tag": "v4.4.2"
+    },
+    "torizoncore-builder": {
+      "commit": "0d375dd17b145d8519e52a1e3f75d4a6d3dffa74"
+    },
+    "torizon-yocto-layer": {
+      "commit": "62bc1adb0a4b4045cfa8f8b7bac08a35a3496459"
+    }
+  }
+}

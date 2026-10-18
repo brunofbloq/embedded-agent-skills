@@ -1,0 +1,3 @@
+interface:
+  display_name: "Embedded QA"
+  short_description: "Verify firmware with host tests, Renode, HIL and real hardware"

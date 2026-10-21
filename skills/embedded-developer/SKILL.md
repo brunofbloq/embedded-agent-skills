@@ -17,6 +17,21 @@ Optimize for correct, minimal, verifiable changes with low context overhead. Tre
 6. **Verify:** Run focused unit/host tests, target build, configured formatting/static checks, and size/map/stack analysis where applicable. Delegate emulation, fault injection and on-board verification to `embedded-qa` when requested/available; distinguish NOT RUN from PASS.
 7. **Report:** Briefly state files changed, commands/results, target and hardware assumptions, unmeasured risks, and changes to public behavior/interfaces.
 
+## Task and artifact handoff
+
+Agree an observable outcome, required inputs, integration hooks, affected checks
+and stop conditions before implementation. Missing prerequisite source blocks
+execution unless recovery/reconstruction is explicitly scoped. Registry/build
+wiring or a NOT_RUN stub does not prove the requested behavior works.
+
+Preserve source changes, all new files/configuration/licence notices and hashes
+in a durable consumer-readable bundle before workspace cleanup or completion.
+Use the runtime's supported local-file upload, verify stored readback/hash, and
+report publication failure instead of deliberating between equivalent methods
+or printing base64 into model context. After a failed bounded correction,
+preserve a done/remaining checkpoint and report the blocker; do not silently
+start another QA cycle or identical retry. Honor owner cancellation/cost-stop.
+
 ## Embedded invariants
 
 - ISRs must have bounded work, correct flag handling, approved RTOS APIs and configured IRQ priorities. Avoid blocking, heap allocation and output formatting in ISR context. Defer noncritical work, but do not invent universal ISR microsecond limits.

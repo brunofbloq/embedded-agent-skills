@@ -184,6 +184,22 @@ The CI review mechanism is **configured but is not active until this repository 
 
 **Thank you** to the owners, maintainers and contributors of all these repositories. Their publicly shared code, skills, documentation and engineering experience have helped make this project more useful and robust. We appreciate their ongoing contributions to the embedded-development community.
 
+## Bounded QA contracts and source handoffs
+
+During task segmentation, refine acceptance criteria with the user and existing
+specialist evidence using the QA [task contract guide](skills/embedded-qa/references/task-qa-contracts.md).
+Architects define input/output, integration and verification ownership; developers
+preserve source-complete bundles; QA checks frozen inputs and reviewers reuse
+unchanged evidence rather than repeating every matrix. Missing hardware becomes
+an explicit bench gap, not an endless software-review loop.
+
+The optional `skills/embedded-qa/scripts/verify_handoff.py` validates a retrieved
+bundle's declared file hashes and required paths. It does not prove dependency
+completeness, build success, hardware qualification or agent compliance. Source
+publication uses the host runtime's attachment mechanism, not a vendor-specific
+service. No scheduler settings, iteration limits or automatic retry policy are
+changed by these skills.
+
 ## Testing and packaging
 
 ```powershell

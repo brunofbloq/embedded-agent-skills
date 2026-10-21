@@ -7,6 +7,16 @@ description: Design, implement and execute embedded firmware verification across
 
 Deliver evidence-based, reproducible tests without claiming capabilities that the test environment cannot demonstrate. Choose one or more backends appropriate to the feature and its failure modes, not a prescribed test pyramid for every change.
 
+## Planning and execution boundaries
+
+During task segmentation, use [task-qa-contracts.md](references/task-qa-contracts.md)
+to refine acceptance criteria with the user and existing specialist evidence.
+Before execution, require a frozen, source-complete handoff and named affected
+checks. Separate bench acceptance from software results; reuse same-input
+evidence instead of automatically repeating another verifier's full matrix.
+Publish confirmed blockers promptly, preserve partial progress, and stop on an
+owner cost-stop. Budget exhaustion requires diagnosis, not an identical retry.
+
 ## Test workflow
 
 1. **Inspect:** Identify actual firmware target, board/silicon revision, toolchain, current test infrastructure, requirements, safety/power/timing constraints, build artifacts and available host/emulator/probe hardware. Reuse existing tests and tooling before introducing a framework.

@@ -25,6 +25,14 @@ Make explicit, defensible architecture decisions before committing to consequent
 
 After the architecture gate is approved, produce a module sequence from low dependencies to high dependencies. For each module: **public contract/interface -> implementation by `embedded-developer` -> build/unit/integration evidence by `embedded-qa` as applicable -> checkpoint -> next module**. At every checkpoint state changed files, public API, dependencies, actual tests, known limitations and deviations from the approved plan. By default request permission to advance to the next module; an explicit user authorization for a bounded autonomous batch may replace individual pause points, but never skip the validation evidence or bypass a newly discovered architectural change. If scope/design changes materially, return to Phase 1.
 
+Before segmenting the plan into implementation and verification work items,
+refine task QA contracts with the user and relevant existing specialist evidence.
+Each task needs observable acceptance, frozen inputs, source ownership, durable
+outputs, named affected checks and stop conditions. Explicitly plan build/registry/
+boot integration and source-completeness gates; assign one executor per check.
+Keep missing hardware evidence separate from software completion. Do not add a
+fresh council per task or duplicate verification matrices by default.
+
 The architect owns the decision and evidence gates, not necessarily every line of code. Never report a build, Renode test or HIL result as passed unless it actually ran; simulated tests are not hardware qualification.
 
 ## Load only relevant platform references

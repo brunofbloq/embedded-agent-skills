@@ -1,10 +1,10 @@
 # Embedded Agent Skills
 
+[![Version](https://img.shields.io/badge/version-v0.1.0-216E39)](https://github.com/brunofbloq/embedded-agent-skills/releases/tag/v0.1.0)
 [![Skills](https://img.shields.io/badge/skills-3-0B7285)](skills/)
 [![Format](https://img.shields.io/badge/format-Agent%20Skills-6750A4)](https://agentskills.io/)
 [![CI](https://img.shields.io/badge/CI-GitHub%20Actions%20configured-0969DA)](.github/workflows/validate-skills.yml)
 [![Upstream](https://img.shields.io/badge/upstream-16%20sources%20monitored-216E39)](maintenance/sources.json)
-[![LLM](https://img.shields.io/badge/upstream%20PRs-no%20LLM-216E39)](.github/workflows/upstream-review.yml)
 
 
 

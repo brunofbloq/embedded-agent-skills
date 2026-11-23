@@ -2,7 +2,7 @@
   "schema_version": 1,
   "sources": {
     "jeffallan-embedded": {
-      "commit": "36f3fe8052da7c57083783268c6ea3265d075265"
+      "commit": "d98d06edb54c25cfb94017c0ef830342a34a43ba"
     },
     "rovinax-embedded": {
       "commit": "022ce31b469b1a1d0c1261c2c8d0f3e07b2c0bbc"
@@ -14,10 +14,10 @@
       "commit": "b57c80dd83c59c6a227abc74ab8f0debdcb35dba"
     },
     "mcu-board-profiles": {
-      "commit": "48b56f8756a21c6e566bd3edd6a1f942b4ef2738"
+      "commit": "816967f30a7dbdf4759ad585b822eda3575f720c"
     },
     "embedded-tooling": {
-      "commit": "536c1f929e359a5c02ef8ea9f1a20691e8d764e3"
+      "commit": "5d61e96268f10249b3dc1513aa253df86c8ef263"
     },
     "embedded-tool-calculators": {
       "commit": "57ab091cbebf655a788fba579d027b690065ab4e"
@@ -32,19 +32,19 @@
       "commit": "3554bc37495805d57d2bbf4fc9c2e722a9f79114"
     },
     "renode-releases": {
-      "tag": "v1.17.0"
+      "tag": "v1.17.1"
     },
     "esp-idf-releases": {
-      "tag": "v6.1"
+      "tag": "v6.1.1"
     },
     "freertos-kernel-releases": {
-      "tag": "V11.3.2"
+      "tag": "V11.3.3"
     },
     "zephyr-releases": {
-      "tag": "v4.4.2"
+      "tag": "v4.5.0"
     },
     "torizoncore-builder": {
-      "commit": "0d375dd17b145d8519e52a1e3f75d4a6d3dffa74"
+      "commit": "4d536d91a916ebf79404090d84562a6e4b8063fb"
     },
     "torizon-yocto-layer": {
       "commit": "62bc1adb0a4b4045cfa8f8b7bac08a35a3496459"
